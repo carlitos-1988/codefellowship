@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+<body>
+<div class="signup-container">
+    <h2>Signup</h2>
+    <form action="/signup" method="post">
+        <label >Username</label>
+        <input type="text"  name="username" required>
+
+        <label >Password</label>
+        <input type="password" name="password" required>
+
+        <label >First Name</label>
+        <input type="text"  name="firstName" required>
+
+        <label f>Last Name</label>
+        <input type="text"  name="lastName" required>
+
+        <label >Birth Date</label>
+        <input type="date"  name="birthDate" required>
+
+        <label >Bio</label>
+        <textarea  type="text" name="bio" rows="4" required></textarea>
+
+        <button type="submit" class="btn btn-primary">Signup</button>
+    </form>
+    <p class="error-message" id="error-msg"></p>
+</div>
+
+</body>
+</html>

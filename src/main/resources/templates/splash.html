@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+
+</head>
+<body>
+
+<div class="hero" data-theme="dark">
+    <nav class="container-fluid">
+        <ul>
+            <li>
+                <a href="./" class="contrast" onclick="event.preventDefault()"
+                ><strong>Code Fellowship</strong></a
+                >
+            </li>
+        </ul>
+<!--        <ul>-->
+<!--            <li>-->
+<!--                <details role="list" dir="rtl">-->
+<!--                    <summary aria-haspopup="listbox" role="link" class="contrast">Theme</summary>-->
+<!--                    <ul role="listbox">-->
+<!--                        <li><a href="#" data-theme-switcher="auto">Auto</a></li>-->
+<!--                        <li><a href="#" data-theme-switcher="light">Light</a></li>-->
+<!--                        <li><a href="#" data-theme-switcher="dark">Dark</a></li>-->
+<!--                    </ul>-->
+<!--                </details>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <details role="list" dir="rtl">-->
+<!--                    <summary aria-haspopup="listbox" role="link" class="contrast">Examples (v1)</summary>-->
+<!--                    <ul role="listbox">-->
+<!--                        <li><a href="../v1-preview/">Preview</a></li>-->
+<!--                        <li><a href="../v1-preview-rtl/">Right-to-left</a></li>-->
+<!--                        <li><a href="../v1-classless/">Classless</a></li>-->
+<!--                        <li><a href="../v1-basic-template/">Basic template</a></li>-->
+<!--                        <li><a href="../v1-company/">Company</a></li>-->
+<!--                        <li><a href="../v1-google-amp/">Google Amp</a></li>-->
+<!--                        <li><a href="../v1-sign-in/">Sign in</a></li>-->
+<!--                        <li><a href="../v1-bootstrap-grid/">Bootstrap grid</a></li>-->
+<!--                    </ul>-->
+<!--                </details>-->
+<!--            </li>-->
+        </ul>
+    </nav>
+    <header class="container">
+        <hgroup>
+            <h1 th:text="${userName}">Code Fellowship</h1>
+            <h2>Welcome to Lab 16</h2>
+        </hgroup>
+        <p><a href="/signup" role="button" >Signup</a></p>
+        <p><a href="/login" role="button" >Login</a></p>
+    </header>
+</div>
+<!-- ./ Hero -->
+
+<!-- Main -->
+
+<!-- ./ Main -->
+
+<!-- Subscribe -->
+<section aria-label="Subscribe example">
+    <div class="container">
+        <article>
+            <hgroup>
+                <h2>Subscribe</h2>
+                <h3>Litora torquent per conubia nostra</h3>
+            </hgroup>
+            <form class="grid">
+                <input
+                        type="text"
+                        id="firstname"
+                        name="firstname"
+                        placeholder="First name"
+                        aria-label="First name"
+                        required
+                />
+                <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email address"
+                        aria-label="Email address"
+                        required
+                />
+                <button type="submit" onclick="event.preventDefault()">Subscribe</button>
+            </form>
+        </article>
+    </div>
+</section>
+<!-- ./ Subscribe -->
+
+<!-- Footer -->
+<footer class="container">
+    <small
+    >Built with <a href="https://picocss.com">Pico</a> •
+        <a href="https://github.com/picocss/examples/tree/master/v1-company/">Source code</a></small
+    >
+</footer>
+<!-- ./ Footer -->
+
+<!-- Minimal theme switcher -->
+<!--<script src="js/minimal-theme-switcher.js"></script>-->
+</body>
+
+</body>
+</html>
