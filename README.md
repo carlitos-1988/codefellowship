@@ -19,3 +19,20 @@ Ensure that your homepage, login, and registration routes are accessible to non-
 The site should be well-styled and attractive.
 The site should use templates to display its information.
 Ensure that user registration also logs users into your app automatically.
+
+## Feature Tasks 1Aug2023
+
+- Allow users to log in to CodeFellowship, view user profiles, and create posts.
+
+- Upon logging in, users should be taken to a /myprofile route that displays their information.
+- This should include a default profile picture, which is the same for every user, and their basic information from ApplicationUser.
+- The site should have a page which allows viewing the data about a single ApplicationUser, at a route like /users/{id}.
+- This should include a default profile picture, which is the same for every user, and their basic information.
+- Continue to ensure that your homepage, login, and registration routes are accessible to non-logged in users. All other routes should be limited to logged-in users.
+- Add a Post entity to your app.
+- A Post has a body and a createdAt timestamp.
+- A logged-in user should be able to create a Post, and a post should belong to the user that created it.
+Hint: This is a relationship between two pieces of data
+- A user’s posts should be visible on their profile page.
+- The site should use reusable templates for its information. (At a minimum, it should have one Thymeleaf fragment that is used on multiple pages.)
+- The site should have a non-whitelabel error handling page that lets the user know, at minimum, the error code and a brief message about what went wrong.
