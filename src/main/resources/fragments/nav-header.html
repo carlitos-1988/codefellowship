@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="hero" data-theme="dark" th:fragment="default-header">
+
+  <nav class="container-fluid">
+    <ul>
+      <li>
+        <a href="./" class="contrast" onclick="event.preventDefault()"><strong>Code Fellowship</strong></a>
+      </li>
+    </ul>
+
+  </nav>
+  <header class="container">
+    <hgroup>
+      <h1 th:text="${userName}">Code Fellowship</h1>
+      <h2>Welcome to Lab 16</h2>
+    </hgroup>
+    <p><a href="/signup" role="button" >Signup</a></p>
+    <p><a href="/login" role="button" >Login</a></p>
+  </header>
+</div>
+
+</body>
+</html>

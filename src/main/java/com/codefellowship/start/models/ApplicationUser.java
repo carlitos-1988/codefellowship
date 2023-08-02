@@ -1,14 +1,13 @@
 package com.codefellowship.start.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -22,6 +21,9 @@ public class ApplicationUser implements UserDetails {
     private Date birthDate;
     private String bio;
 
+    @OneToMany(mappedBy = "applicationUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<Post> posts;
+
     protected ApplicationUser(){};
 
     public ApplicationUser(String userName, String password, String firstName, String lastName, Date birthDate, String bio) {
@@ -31,6 +33,7 @@ public class ApplicationUser implements UserDetails {
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.bio = bio;
+        this.posts = new ArrayList<>();
     }
 
     @Override
@@ -89,5 +92,13 @@ public class ApplicationUser implements UserDetails {
 
     public String getBio() {
         return bio;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPost(Post post) {
+        this.posts.add(post);
     }
 }
