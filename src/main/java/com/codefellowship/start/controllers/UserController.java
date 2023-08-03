@@ -12,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
@@ -66,7 +63,7 @@ public class UserController {
             m.addAttribute("posts", applicationUser.getPosts());
         }
 
-        return "verified.html";
+        return "my-page.html";
     }
 
     @GetMapping("/verified/{id}")
@@ -76,20 +73,42 @@ public class UserController {
             ApplicationUser applicationUser = codeUserRepository.findByUserName(userName);
 
             m.addAttribute("userName", applicationUser.getUserName());
-            m.addAttribute("firstName", applicationUser.getFirstName());
-            m.addAttribute("lastName", applicationUser.getLastName());
 
         }
 
         ApplicationUser pageApplicationUser = codeUserRepository.findById(id).orElseThrow();
+
         m.addAttribute("hostUserName", pageApplicationUser.getUserName());
         m.addAttribute("hostFistName", pageApplicationUser.getFirstName());
         m.addAttribute("hostId", pageApplicationUser.getId());
         m.addAttribute("bio", pageApplicationUser.getBio());
-        m.addAttribute("pageApplicationUserPosts", pageApplicationUser.getPosts());
         m.addAttribute("guestPost", pageApplicationUser.getPosts());
 
         return "verified.html";
+    }
+
+    //Method to make connection for following a person this comes from verified.html
+    @PutMapping("/follow-user/{id}")
+    public RedirectView followUser(Principal p,@PathVariable Long id){
+        System.out.println("Made it to followUser method ----------------");
+        ApplicationUser userToFollow = codeUserRepository.findById(id).orElseThrow(() -> new RuntimeException("Error reading user from the DB with ID of: " + id));
+
+        //this grabs currently logged-in user
+        ApplicationUser browsingUser = codeUserRepository.findByUserName(p.getName());
+
+        //check that the user is not trying to follow themselves
+        if(browsingUser.getUserName().equals(userToFollow.getUserName())){
+            throw new IllegalArgumentException("Following yourself is not allowed");
+        }
+
+        //access followers from the browsingUser and update with the new user to follow
+        //using a set data type to make sure that the values are unique
+        browsingUser.getUsersIFollow().add(userToFollow);
+
+        //save to the database does not create new entry since entity is already in DB
+        codeUserRepository.save(browsingUser);
+
+        return new RedirectView("/verified/" + id);
     }
 
     @GetMapping("/logout")

@@ -7,63 +7,40 @@
 
 </head>
 <body>
-<div class="hero" data-theme="dark">
-    <nav class="container-fluid">
-        <ul>
-            <li>
-                <a href="./" class="contrast" onclick="event.preventDefault()"
-                ><strong>Code Fellowship</strong></a
-                >
-            </li>
-        </ul>
-    </nav>
-    <header class="container">
-        <hgroup>
-            <h1 th:text="'Username: ' + ${userName}">FILLER</h1>
-            <h2 th:text="'First Name: ' + ${firstName}">FILLER</h2>
-            <h1 th:text="'Last Name: '+ ${lastName}">FILLER</h1>
-            <div th:text="${birthDate}"></div>
-            <h2 th:text="${bio}">FILLER</h2>
-        </hgroup>
+<div th:replace="~{/fragments/nav-header :: default-header}"></div>
+<hr>
+<div>
 
-        <p><a href="/logout" role="button" >Logout</a></p>
-
-
-
-        <form action="/addPost" method="post">
-            <label >Write Post</label>
-            <input type="text"  name="postData" required>
-
-            <input type="submit" class="btn btn-primary">Submit</input>
-        </form>
-
-        <ul th:each="post: ${posts}">
-            <li th:text="${post.getBody}"></li>
-            <li th:text="${post.getCreatedAt}"></li>
-            <li th:text="${post.getApplicationUser.getUserName}"></li>
-        </ul>
-        <ul th:each="post: ${guestPost}">
-            <li th:text="${post.getBody}"></li>
-            <li th:text="${post.getCreatedAt}"></li>
-            <li th:text="${post.getApplicationUser.getUserName}"></li>
-        </ul>
-
-
-
-
-
-
-
-
-        <hgroup>
+<header class="container">
+<!--    show basic data    -->
+    <hgroup>
             <h1 th:text="${hostUserName}">USERNAME</h1>
             <h2 th:text="${hostFistName}">FIRSTNAME</h2>
             <h2 th:text="'ID: ' + ${hostId}">ID OF PERSON</h2>
             <h2 th:text="${bio}"></h2>
+    </hgroup>
+    <hr>
+<!--    Follow form -->
+    <form th:action="${'/follow-user/' + hostId}" th:method="PUT">
+        <input type="submit" value="Follow" th:disabled="${hostUserName.equals(userName)}">
+    </form>
 
-        </hgroup>
 
-    </header>
+<!--    show posts for user-->
+    <ul th:each="post: ${posts}">
+        <li th:text="${post.getBody}"></li>
+        <li th:text="${post.getCreatedAt}"></li>
+        <li th:text="${post.getApplicationUser.getUserName}"></li>
+    </ul>
+    <ul th:each="post: ${guestPost}">
+        <li th:text="${post.getBody}"></li>
+        <li th:text="${post.getCreatedAt}"></li>
+        <li th:text="${post.getApplicationUser.getUserName}"></li>
+    </ul>
+
+
+</header>
+
 </div>
 
 </body>
