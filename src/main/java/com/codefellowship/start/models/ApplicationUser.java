@@ -4,10 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -34,6 +31,34 @@ public class ApplicationUser implements UserDetails {
         this.birthDate = birthDate;
         this.bio = bio;
         this.posts = new ArrayList<>();
+    }
+
+    //Many to Many Impl
+    @ManyToMany
+    @JoinTable(
+            name= "followers_to_followers",
+            joinColumns = {@JoinColumn(name = "appUserFollowing")},
+            inverseJoinColumns = {@JoinColumn(name="followedUser")}
+    )
+    Set<ApplicationUser>usersIFollow= new HashSet<>();
+
+    @ManyToMany(mappedBy = "usersIFollow")
+    Set<ApplicationUser> userWhoFollowMe = new HashSet<>();
+
+    public Set<ApplicationUser> getUsersIFollow() {
+        return usersIFollow;
+    }
+
+    public void setUsersIFollow(Set<ApplicationUser> usersIFollow) {
+        this.usersIFollow = usersIFollow;
+    }
+
+    public Set<ApplicationUser> getUserWhoFollowMe() {
+        return userWhoFollowMe;
+    }
+
+    public void setUserWhoFollowMe(Set<ApplicationUser> userWhoFollowMe) {
+        this.userWhoFollowMe = userWhoFollowMe;
     }
 
     @Override
